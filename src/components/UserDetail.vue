@@ -9,6 +9,8 @@
 </template>
 
 <script>
+    import { eventBus } from '../main';
+
     export default {
         props: {
             myName: {
@@ -21,9 +23,14 @@
                 return this.myName.split('').reverse().join('');
             },
             resetName() {
-              this.myName = 'Wan';
-              this.$emit('nameWasReset', this.myName);
+                this.myName = 'Wan';
+                this.$emit('nameWasReset', this.myName);
             }
+        },
+        created() {
+            eventBus.$on('ageWasEditted', (data) => {
+                this.userAge = data;
+            });
         }
     }
 </script>
